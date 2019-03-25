@@ -17,6 +17,5 @@ alias ssh2someinthost='ssh -J appuser@35.233.10.136 appuser@10.132.0.6'
 
 ========================================================================
 
-
 bastion_IP = 35.233.10.136
 someinternalhost_IP = 10.132.0.6
