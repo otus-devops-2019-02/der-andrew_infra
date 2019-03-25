@@ -8,4 +8,3 @@ README.md в вашем репозитории.
 
 bastion_IP = 35.233.10.136
 someinternalhost_IP = 10.132.0.6
-
