@@ -7,3 +7,4 @@ cd reddit/
 bundle install
 puma -d
 ps aux | egrep puma
+
