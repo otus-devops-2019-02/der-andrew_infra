@@ -1,7 +1,7 @@
 # der-andrew_infra
 der-andrew Infra repository
 
-[asterisc]
+asterisc
 Исследовать способ подключения к someinternalhost в одну команду
 из вашего рабочего устройства, проверить работоспособность найденного решения и внести его в
 README.md в вашем репозитории.
@@ -10,7 +10,7 @@ README.md в вашем репозитории.
 ssh -i ~/.ssh/GCP-appuser -t appuser@35.233.10.136 -A ssh appuser@10.132.0.6
 2. Method two.
 ssh -J appuser@35.233.10.136 appuser@10.132.0.6
-В обоих случаях агент должен работать с добавленным ключом ессесна)
+В обоих случаях агент должен работать с добавленным ключом ессесна
 
 Добавляем алиас на понравившийся метод
 alias ssh2someinthost='ssh -J appuser@35.233.10.136 appuser@10.132.0.6'
@@ -30,3 +30,4 @@ someinternalhost_IP = 10.132.0.6
 
 testapp_IP = 35.195.185.92
 testapp_port = 9292
+
