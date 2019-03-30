@@ -1,0 +1,41 @@
+{
+  "variables": {
+    "var_image_family": "reddit-full",
+    "var_source_image_family": "reddit-base",
+    "var_source_image": "reddit-base-1553971626"
+  },
+"builders": [
+    {
+      "type": "googlecompute",
+      "project_id": "{{user `var_project_id`}}",
+      "image_name": "{{user `var_image_family`}}-{{timestamp}}",
+      "image_family": "{{user `var_image_family`}}",
+      "source_image_family": "{{user `var_source_image_family`}}",
+      "source_image": "{{user `var_source_image`}}",
+      "zone": "europe-west1-d",
+      "ssh_username": "appuser",
+      "machine_type": "{{user `var_machine_type`}}",
+      "image_description": "Puma Application",
+      "disk_type": "pd-standard",
+      "disk_size": "11",
+      "network": "default",
+      "labels": {
+        "image_family": "redditfull",
+        "inst_type": "pumaapp"
+        },
+      "tags": [
+        "tredditfull",
+        "tpumaapp"
+      ],
+      "on_host_maintenance": "MIGRATE",
+      "preemptible": "false"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "script": "scripts/deploy.sh",
+      "execute_command": "sudo {{.Path}}"
+    }
+  ]
+}
