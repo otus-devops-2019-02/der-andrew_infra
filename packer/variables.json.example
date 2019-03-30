@@ -1,0 +1,5 @@
+{
+ "var_project_id": "test-123456",
+ "var_source_image_family": "ubuntu-test",
+ "var_machine_type": "f1-micro-test"
+}
