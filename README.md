@@ -38,37 +38,45 @@ testapp_port = 9292
 -- **gcloud auth application-default login**
 - Создан  packer template
 ```
-{                                                                                                                                                                                                           
-  "builders": [                                                                                                                                                                                             
-    {                                                                                                                                                                                                       
-      "type": "googlecompute",                                                                                                                                                                              
-      "project_id": "infra-451193",                                                                                                                                                                         
-      "image_name": "reddit-base-{{timestamp}}",                                                                                                                                                            
-      "image_family": "reddit-base",                                                                                                                                                                        
-      "source_image_family": "ubuntu-1604-lts",                                                                                                                                                             
-      "zone": "europe-west1-d",                                                                                                                                                                             
-      "ssh_username": "appuser",                                                                                                                                                                            
-      "machine_type": "f1-micro"                                                                                                                                                                            
-    }                                                                                                                                                                                                       
-  ],                                                                                                                                                                                                        
-  "provisioners": [                                                                                                                                                                                         
-    {                                                                                                                                                                                                       
-      "type": "shell",                                                                                                                                                                                      
-      "script": "scripts/install_ruby.sh",                                                                                                                                                                  
-      "execute_command": "sudo {{.Path}}"                                                                                                                                                                   
-    },                                                                                                                                                                                                      
-    {                                                                                                                                                                                                       
-      "type": "shell",                                                                                                                                                                                      
-      "script": "scripts/install_mongodb.sh",                                                                                                                                                               
-      "execute_command": "sudo {{.Path}}"                                                                                                                                                                   
-    }                                                                                                                                                                                                       
-  ]                                                                                                                                                                                                         
-}                                                                                                                                                                                                           
+{
+  "builders": [
+    {
+      "type": "googlecompute",
+      "project_id": "{{user `var_project_id`}}",
+      "image_name": "reddit-base-{{timestamp}}",
+      "image_family": "reddit-base",
+      "source_image_family": "{{user `var_source_image_family`}}",
+      "zone": "europe-west1-d",
+      "ssh_username": "appuser",
+      "machine_type": "{{user `var_machine_type`}}"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "script": "scripts/install_ruby.sh",
+      "execute_command": "sudo {{.Path}}"
+    },
+    {
+      "type": "shell",
+      "script": "scripts/install_mongodb.sh",
+      "execute_command": "sudo {{.Path}}"
+    }
+  ]
+}
+```
+- Создан файл с описанием переменных **variables.json**
+```
+{
+ "var_project_id": "infra-451193",
+ "var_source_image_family": "ubuntu-1604-lts",
+ "var_machine_type": "f1-micro"
+}
 ```
 - Проведена проверка на ошибки. Команда:
--- **packer validate ./ubuntu16.json**
+-- **packer validate -var-file variables.json ./ubuntu16.json**
 - Запущен build  образа. Команда:
--- **packer build ubuntu16.json**
+-- **packer build -var-file variables.json ubuntu16.json**
 - Создана виртуальная машина из кастомного образа.
 - Подключились командой
 -- **ssh appuser@35.195.185.92**
@@ -87,3 +95,75 @@ ps aux | egrep puma
 - Добавили метку фаервола для разрешения tcp/9292
 - Для проверки необходимо зайти по ссылке:
 (http://http://35.195.185.92:9292)
+
+## Задача со звездой
+
+- Создан шаблон для immutable  инфраструктуры.
+```
+{
+  "variables": {
+    "var_image_family": "reddit-full",
+    "var_source_image_family": "reddit-base",
+    "var_source_image": "reddit-base-1553971626"
+  },
+"builders": [
+    {
+      "type": "googlecompute",
+      "project_id": "{{user `var_project_id`}}",
+      "image_name": "{{user `var_image_family`}}-{{timestamp}}",
+      "image_family": "{{user `var_image_family`}}",
+      "source_image_family": "{{user `var_source_image_family`}}",
+      "source_image": "{{user `var_source_image`}}",
+      "zone": "europe-west1-d",
+      "ssh_username": "appuser",
+      "machine_type": "{{user `var_machine_type`}}",
+      "image_description": "Puma Application",
+      "disk_type": "pd-standard",
+      "disk_size": "11",
+      "network": "default",
+      "labels": {
+        "image_family": "redditfull",
+        "inst_type": "pumaapp"
+        },
+      "tags": [
+        "tredditfull",
+        "tpumaapp"
+      ],
+      "on_host_maintenance": "MIGRATE",
+      "preemptible": "false"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "script": "scripts/deploy.sh",
+      "execute_command": "sudo {{.Path}}"
+    }
+  ]
+}
+```
+- Проведена проверка на ошибки. Команда:
+-- **packer validate -var-file variables.json immutable.json**
+- Запущен build  образа. Команда:
+-- **packer build -var-file variables.json immutable.json**
+- Создана виртуальная машина из кастомного образа. Для этого создан скрипт **create-reddit-vm.sh**
+```
+#!/bin/bash
+set -e
+
+echo "---=== Creating reddit VM... ===---"
+gcloud compute --project=infra-451193 instances create reddit-app-full \
+--zone=europe-west1-d --machine-type=g1-small \
+--subnet=default --network-tier=PREMIUM --maintenance-policy=MIGRATE \
+--service-account=735155033088-compute@developer.gserviceaccount.com \
+--scopes=https://www.googleapis.com/auth/devstorage.read_only,\
+https://www.googleapis.com/auth/logging.write,\
+https://www.googleapis.com/auth/monitoring.write,\
+https://www.googleapis.com/auth/servicecontrol,\
+https://www.googleapis.com/auth/service.management.readonly,\
+https://www.googleapis.com/auth/trace.append \
+--tags=puma-server --image=reddit-full-1553980024 --image-project=infra-451193 \
+--boot-disk-size=11GB --boot-disk-type=pd-standard --boot-disk-device-name=reddit-app-full
+```
+- После создания машины, подключились по ссылке:
+-- http://35.233.97.151:9292
