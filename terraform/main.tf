@@ -7,9 +7,9 @@ provider "google" {
   version = "2.0.0"
 
   # ID проекта
-  project = "infra-451193"
+  project = "${var.project}"
 
-  region = "europe-west-1"
+  region = "${var.region}"
 }
 
 resource "google_compute_instance" "app" {
@@ -20,7 +20,7 @@ resource "google_compute_instance" "app" {
   # определение загрузочного диска
   boot_disk {
     initialize_params {
-      image = "reddit-base"
+      image = "${var.disk_image}"
     }
   }
   # определение сетевого интерфейса
@@ -32,7 +32,7 @@ resource "google_compute_instance" "app" {
   }
   metadata {
     # путь до публичного ключа
-    ssh-keys = "appuser:${file("~/.ssh/GCP-appuser.pub")}"
+    ssh-keys = "appuser:${file("${var.public_key_path}")}"
   }
   connection {
     type = "ssh"
