@@ -77,3 +77,10 @@ resource "google_compute_firewall" "firewall_puma" {
   # Правило применимо для инстансов с перечисленными тэгами
   target_tags = ["reddit-app"]
 }
+
+resource "google_compute_project_metadata_item" "default" {
+  key   = "appuser1"
+  value = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDQDJZCNT32ijx2RERZ8vz58QM4twAbByjH1aZ9NRPml9+40uJjvP0kpBz34FCDAkf8YEW6Jtfj1hpwPfyTYewTXkN1PdUFF4inkSrnOwM5BcOe8iC7S+gqhRKeZskY1VfGOELFYd+kd/S4JOE1/4z1L+3g82muBa11/RJ6qWKgkzuYLMTrXIXfkFZ2Q7WwMMZUtsr1dSsrQBYP2GkOKrGQWpKH7IAdkC1uNcUGAu3Qjk4i8zmCkGLJmwyuFL0uYVHLPDpip0guorzWLRbRyj8Vbabrv1+P8JMdVe8J+Bnj8vKsv07vYJCN1KCsZYfJidDAl0BTaqsiNIaMBFJTaXkR appuser1"
+  key   = "appuser2"
+  value = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDQDJZCNT32ijx2RERZ8vz58QM4twAbByjH1aZ9NRPml9+40uJjvP0kpBz34FCDAkf8YEW6Jtfj1hpwPfyTYewTXkN1PdUFF4inkSrnOwM5BcOe8iC7S+gqhRKeZskY1VfGOELFYd+kd/S4JOE1/4z1L+3g82muBa11/RJ6qWKgkzuYLMTrXIXfkFZ2Q7WwMMZUtsr1dSsrQBYP2GkOKrGQWpKH7IAdkC1uNcUGAu3Qjk4i8zmCkGLJmwyuFL0uYVHLPDpip0guorzWLRbRyj8Vbabrv1+P8JMdVe8J+Bnj8vKsv07vYJCN1KCsZYfJidDAl0BTaqsiNIaMBFJTaXkR appuser1"
+}
