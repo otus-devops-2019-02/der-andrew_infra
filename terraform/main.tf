@@ -81,10 +81,10 @@ resource "google_compute_firewall" "firewall_puma" {
 }
 
 resource "google_compute_firewall" "firewall_ssh" {
-  name    = "default-allow-ssh"
-  network = "default"
+  name        = "default-allow-ssh"
+  network     = "default"
   description = "Allow ssh from any"
-  priority = "65534"
+  priority    = "65534"
 
   allow {
     protocol = "tcp"
