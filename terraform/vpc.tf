@@ -11,7 +11,3 @@ resource "google_compute_firewall" "firewall_ssh" {
 
   source_ranges = ["0.0.0.0/0"]
 }
-
-resource "google_compute_address" "app_ip" {
-  name = "reddit-app-ip"
-}
