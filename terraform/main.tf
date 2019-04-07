@@ -31,8 +31,10 @@ resource "google_compute_instance" "app" {
     # сеть, к которой присоединить данный интерфейс
     network = "default"
 
-    # использовать ephemeral IP для доступа из Интернет
-    access_config {}
+    # использовать static IP для доступа из Интернет
+    access_config = {
+      nat_ip = "${google_compute_address.app_ip.address}"
+    }
   }
 
   metadata {
