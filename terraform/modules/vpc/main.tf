@@ -1,5 +1,5 @@
 resource "google_compute_firewall" "firewall_ssh" {
-  name        = "default-allow-ssh"
+  name        = "default-allow-ssh-${var.inst_suff}"
   network     = "default"
   description = "Allow ssh from any"
   priority    = "65534"
@@ -13,7 +13,7 @@ resource "google_compute_firewall" "firewall_ssh" {
 }
 
 resource "google_compute_firewall" "firewall_puma" {
-  name    = "allow-puma-default"
+  name    = "allow-puma-default-${var.inst_suff}"
   network = "default"
 
   allow {
@@ -27,7 +27,7 @@ resource "google_compute_firewall" "firewall_puma" {
 }
 
 resource "google_compute_firewall" "firewall_mongo" {
-  name    = "allow-mongo-default"
+  name    = "allow-mongo-default-${var.inst_suff}"
   network = "default"
 
   allow {

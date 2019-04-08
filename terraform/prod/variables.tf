@@ -39,3 +39,8 @@ variable db_disk_image {
   description = "Disk image for reddit db"
   default     = "reddit-db-base"
 }
+
+variable inst_suff {
+  description = "Suffix for instances"
+  default     = "undef"
+}

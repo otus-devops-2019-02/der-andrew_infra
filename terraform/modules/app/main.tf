@@ -1,5 +1,5 @@
 resource "google_compute_instance" "app" {
-  name         = "reddit-app"
+  name         = "reddit-app-${var.inst_suff}"
   machine_type = "g1-small"
   zone         = "${var.zone}"
   tags         = ["reddit-app"]
@@ -14,7 +14,7 @@ resource "google_compute_instance" "app" {
     network = "default"
 
     access_config = {
-      nat_ip = "${google_compute_address.app_ip.address}"
+#      nat_ip = "${google_compute_address.app_ip.address}"
     }
   }
 
@@ -22,7 +22,7 @@ resource "google_compute_instance" "app" {
     ssh-keys = "appuser:${file(var.public_key_path)}"
   }
 }
-
-resource "google_compute_address" "app_ip" {
-  name = "reddit-app-ip"
-}
+#
+#resource "google_compute_address" "app_ip" {
+#  name = "reddit-app-ip-${var.inst_suff}"
+#}
