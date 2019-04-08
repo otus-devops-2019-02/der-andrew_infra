@@ -203,3 +203,52 @@ http://35.195.185.92:9292/
 
 
 # Terraform-2
+
+- Создан ресурс для файервола
+```
+resource "google_compute_firewall" "firewall_ssh" {
+name = "default-allow-ssh"
+network = "default"
+allow {
+protocol = "tcp"
+ports = ["22"]
+}
+source_ranges = ["0.0.0.0/0"]
+}
+```
+- После ошибки сделали импорт дефолтных правил
+***terraform import google_compute_firewall.firewall_ssh default-allow-ssh***
+- Создали ресурс со статическим адресом
+```
+resource "google_compute_address" "app_ip" {
+name = "reddit-app-ip"
+}
+```
+- Базу данных и приложение разбили на отделные VM.
+- Создали отдельную конфигурацию для ресурсов фаервола.
+- Создали модули.
+- Ввели для моделуй параметры из переменных.
+- Проверили, что на ресурсы можно подключаться только с заданного хоста.
+- Создали две инфраструктуры stage и prod посредством переиспользования модулей.
+- Параметризовали эти инфраструктуры.
+- Используя реестр модулей создали два бакета
+```
+provider "google" {
+  version = "2.0.0"
+  project = "${var.project}"
+  region  = "${var.region}"
+}
+
+module "storage-bucket" {
+  source  = "SweetOps/storage-bucket/google"
+  version = "0.1.1"
+
+  # Имена поменяйте на другие
+  name = ["storage-bucket-product", "storage-bucket-stages"]
+}
+
+output storage-bucket_url {
+  value = "${module.storage-bucket.url}"
+}
+```
+- Уничтожили все поделки.
