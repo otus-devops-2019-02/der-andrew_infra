@@ -26,3 +26,7 @@ module "db" {
   zone = "${var.zone}"
   db_disk_image = "${var.db_disk_image}"
 }
+
+module "vpc" {
+  source = "modules/vpc"
+}
