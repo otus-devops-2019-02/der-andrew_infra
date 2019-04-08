@@ -3,8 +3,8 @@
     {
       "type": "googlecompute",
       "project_id": "{{user `var_project_id`}}",
-      "image_name": "reddit-base-{{timestamp}}",
-      "image_family": "reddit-base",
+      "image_name": "reddit-app-base-{{timestamp}}",
+      "image_family": "reddit-app-base",
       "source_image_family": "{{user `var_source_image_family`}}",
       "zone": "europe-west1-d",
       "ssh_username": "appuser",
