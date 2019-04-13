@@ -252,3 +252,29 @@ output storage-bucket_url {
 }
 ```
 - Уничтожили все поделки.
+
+# Ansible-1 task
+- Создали ветку и необходимые папки с файлами
+- Установили pip
+***pip install -r requirements.txt***
+- Подняли инфраструктуру stage:
+```
+app_external_ip = 35.187.12.34
+db_external_ip = 35.195.232.23
+```
+- Создали файл inventory и проверили доступность хостов командой
+***ansible appserver -i ./inventory -m ping***
+```
+appserver | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+```
+***ansible dbserver -i ./inventory -m ping***
+```
+dbserver | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+```
+- 
