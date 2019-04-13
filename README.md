@@ -294,10 +294,19 @@ appserver | CHANGED | rc=0 >>
 dbserver | SUCCESS => {
     "changed": false,
     "ping": "pong"
-}
+}***
+
 appserver | SUCCESS => {
     "changed": false,
     "ping": "pong"
 }
+```
+- Создали плейбук и запустили:
+***ansible-playbook clone.yml***
+- Удалили клон
+***ansible app -i inventory.yml -m shell -a "rm -dfr ~/reddit"***
+- Выполнили плейбук ещё раз. Состояние поменялось, т.к. репозитория не было.
+```
+appserver                  : ok=2    changed=1    unreachable=0    failed=0
 ```
 - 
