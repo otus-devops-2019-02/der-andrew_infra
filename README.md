@@ -277,4 +277,27 @@ dbserver | SUCCESS => {
     "ping": "pong"
 }
 ```
+- Создали конфигурацию ansible и проверили хосты:
+***ansible dbserver -m command -a uptime***
+```dbserver | CHANGED | rc=0 >>
+ 19:40:10 up 29 min,  1 user,  load average: 0.06, 0.01, 0.00
+```
+***appserver -m command -a uptime***
+```
+appserver | CHANGED | rc=0 >>
+ 19:40:18 up 29 min,  1 user,  load average: 0.00, 0.00, 0.00
+```
+- Создали группы хостов.
+- Создали inventory.yml и проверили доступность хостов:
+***ansible all -i inventory.yml -m ping***
+```
+dbserver | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+appserver | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+```
 - 
