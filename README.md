@@ -252,3 +252,60 @@ output storage-bucket_url {
 }
 ```
 - Уничтожили все поделки.
+
+# Ansible-1 task
+- Создали ветку и необходимые папки с файлами
+- Установили pip
+***pip install -r requirements.txt***
+- Подняли инфраструктуру stage:
+```
+app_external_ip = 35.187.12.34
+db_external_ip = 35.195.232.23
+```
+- Создали файл inventory и проверили доступность хостов командой
+***ansible appserver -i ./inventory -m ping***
+```
+appserver | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+```
+***ansible dbserver -i ./inventory -m ping***
+```
+dbserver | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+```
+- Создали конфигурацию ansible и проверили хосты:
+***ansible dbserver -m command -a uptime***
+```dbserver | CHANGED | rc=0 >>
+ 19:40:10 up 29 min,  1 user,  load average: 0.06, 0.01, 0.00
+```
+***appserver -m command -a uptime***
+```
+appserver | CHANGED | rc=0 >>
+ 19:40:18 up 29 min,  1 user,  load average: 0.00, 0.00, 0.00
+```
+- Создали группы хостов.
+- Создали inventory.yml и проверили доступность хостов:
+***ansible all -i inventory.yml -m ping***
+```
+dbserver | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}***
+
+appserver | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+```
+- Создали плейбук и запустили:
+***ansible-playbook clone.yml***
+- Удалили клон
+***ansible app -i inventory.yml -m shell -a "rm -dfr ~/reddit"***
+- Выполнили плейбук ещё раз. Состояние поменялось, т.к. репозитория не было.
+```
+appserver                  : ok=2    changed=1    unreachable=0    failed=0
+```
