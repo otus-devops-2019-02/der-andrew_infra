@@ -14,5 +14,5 @@
       notify: restart mongod
   handlers: # <-- Добавим блок handlers и задачу
   - name: restart mongod
-  become: true
-  service: name=mongod state=restarted
+    become: true
+    service: name=mongod state=restarted
