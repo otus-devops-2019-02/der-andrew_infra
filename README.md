@@ -316,4 +316,5 @@ appserver                  : ok=2    changed=1    unreachable=0    failed=0
 - Определили переменную mongo_bind_ip: 0.0.0.0
 - Сделали пробный прогон командой.
 ***ansible-playbook reddit_app.yml --check --limit db***
+- Добавили handler для перезапуска moglod.
 - 
