@@ -311,10 +311,14 @@ appserver                  : ok=2    changed=1    unreachable=0    failed=0
 ```
 
 # Расширенные возможности  Ansible
-- Создали плейбук reddit_app
-- Создали шаблон mongod.conf.j2 в папке templates
+## Настройка инстанса ДБ
+- Создали плейбук reddit_app.
+- Создали шаблон mongod.conf.j2 в папке templates.
 - Определили переменную mongo_bind_ip: 0.0.0.0
 - Сделали пробный прогон командой.
 ***ansible-playbook reddit_app.yml --check --limit db***
 - Добавили handler для перезапуска moglod.
+## Настройка инстанса приложения
+- Добавили unit file  для сервиса puma.
+- Добавили handler для перезапуска сервиса puma.
 - 
