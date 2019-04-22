@@ -309,3 +309,8 @@ appserver | SUCCESS => {
 ```
 appserver                  : ok=2    changed=1    unreachable=0    failed=0
 ```
+
+# Расширенные возможности  Ansible
+- Создали плейбук reddit_app
+- Создали шаблон mongod.conf.j2 в папке templates
+- 
