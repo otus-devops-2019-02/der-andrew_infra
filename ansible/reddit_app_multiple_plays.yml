@@ -12,6 +12,9 @@
         dest: /etc/mongod.conf
         mode: 0644
       notify: restart mongod
+  handlers:
+  - name: restart mongod
+    service: name=mongod state=restarted
 
 - name: Configure App
   hosts: app
@@ -36,10 +39,13 @@
     - name: enable puma
       systemd: name=puma enabled=yes
 
+  handlers:
+  - name: reload puma
+    systemd: daemon_reload=yes name=puma state=restarted
+
 - name: Deploy
   hosts: app
   tags: deploy-tag
-  become: true
   tasks:
     - name: Fetch the latest version of application code
       git:
@@ -54,8 +60,6 @@
         chdir: /home/appuser/reddit # <-- В какой директории выполнить команду bundle
 
   handlers:
-  - name: restart mongod
-    service: name=mongod state=restarted
-
   - name: reload puma
-    systemd: daemon_reload=yes name=puma state=restarted
+    become: true
+    systemd: name=puma state=restarted
