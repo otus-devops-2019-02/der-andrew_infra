@@ -322,3 +322,5 @@ appserver                  : ok=2    changed=1    unreachable=0    failed=0
 - Добавили unit file  для сервиса puma.
 - Добавили handler для перезапуска сервиса puma.
 - Добавили шаблон и переменную для сервиса puma.
+- Добавили внутренний адрес ДБ в output Terraform
+- 
