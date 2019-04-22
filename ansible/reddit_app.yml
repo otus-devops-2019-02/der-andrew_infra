@@ -1,11 +1,13 @@
 ---
 - name: Configure hosts & deploy application
-    hosts: all
-    tasks:
-      - name: Change mongo config file
-        become: true # <-- Выполнить задание от root
-        template:
-          src: templates/mongod.conf.j2 # <-- Путь до локального файла-шаблона
-          dest: /etc/mongod.conf # <-- Путь на удаленном хосте
-          mode: 0644 # <-- Права на файл, которые нужно установить
-        tags: db-tag # <-- Список тэгов для задачи
+  hosts: all
+  vars:
+    mongo_bind_ip: 0.0.0.0
+  tasks:
+    - name: Change mongo config file
+      become: true # <-- Выполнить задание от root
+      template:
+        src: templates/mongod.conf.j2 # <-- Путь до локального файла-шаблона
+        dest: /etc/mongod.conf # <-- Путь на удаленном хосте
+        mode: 0644 # <-- Права на файл, которые нужно установить
+      tags: db-tag # <-- Список тэгов для задачи
