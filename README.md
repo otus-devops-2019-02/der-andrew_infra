@@ -488,3 +488,6 @@ dbserver                   : ok=3    changed=2    unreachable=0    failed=0
 ```
 - Проверили работоспособность по ссылке:
 http://35.187.12.34:9292/
+## Провижининг в Packer
+- Создали packer_app.yml для установки окружения ruby.
+- 
