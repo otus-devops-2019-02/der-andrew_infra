@@ -1,1 +1,25 @@
 ---
+- name: Install MongoDB
+  hosts: db
+  tags: db-tag
+  become: true
+  tasks:
+    - name: Add apt key
+      apt_key:
+        url: hkp://keyserver.ubuntu.com:80
+        id: EA312927
+        state: present
+    - name: Add apt repository
+      apt_repository:
+        repo: deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse
+        state: present
+        filename: mongodb-org-3.2.list
+    - name: Install MongoDB by apt
+      apt:
+        name: "mongodb-org"
+        update_cache: yes
+    - name: Enable mongod service
+      systemd:
+        daemon_reload: yes
+        name: mongod
+        enabled: yes
