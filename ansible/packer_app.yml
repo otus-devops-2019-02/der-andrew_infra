@@ -1,0 +1,15 @@
+---
+- name: Install Ruby
+  hosts: app
+  tags: app-tag
+  become: true
+  vars:
+    pkgs4ruby:
+      - ruby-full
+      - ruby-bundler
+      - build-essential
+  tasks:
+    - name: Install Ruby by apt
+      apt:
+        name: "{{ pkgs4ruby }}"
+        update_cache: yes
