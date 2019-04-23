@@ -491,4 +491,10 @@ http://35.187.12.34:9292/
 ## Провижининг в Packer
 - Создали packer_app.yml для установки окружения ruby.
 - Создали packer_db.yml для установки окружения mongod.
+- Create images by:
+***packer build -var-file packer/variables.json packer/app.json***
+***packer build -var-file packer/variables.json packer/db.json***
+- Recreate stage by:
+***terraform destroy***
+***terraform apply -auto-approve***
 - 
