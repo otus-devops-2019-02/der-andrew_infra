@@ -497,4 +497,11 @@ http://35.187.12.34:9292/
 - Recreate stage by:
 ***terraform destroy***
 ***terraform apply -auto-approve***
+-
+
+# Ansible-3 Роли, окружения и лучшие практики
+- Создали папки с ролями для апп и дб.
+***mkdir roles; cd roles***4
+***ansible-galaxy init app***
+***ansible-galaxy init db***
 - 
