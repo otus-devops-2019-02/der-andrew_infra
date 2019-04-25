@@ -13,3 +13,6 @@
     group: appuser
 - name: enable puma
   systemd: name=puma enabled=yes
+- name: Show info about the env this host belongs to
+  debug:
+    msg: "This host is in {{ env }} environment!!!"
