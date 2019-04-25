@@ -1,6 +1,6 @@
 ---
 - name: Install Ruby
-  hosts: app
+  hosts: all
   tags: app-tag
   become: true
   vars:
