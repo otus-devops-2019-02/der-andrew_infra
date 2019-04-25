@@ -1,6 +1,6 @@
 ---
 - name: Install MongoDB
-  hosts: db
+  hosts: all
   tags: db-tag
   become: true
   tasks:

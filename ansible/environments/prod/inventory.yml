@@ -7,4 +7,4 @@ all:
       db:
         hosts:
           dbserver:
-            ansible_host: 35.187.177.237
+            ansible_host: 104.155.85.92

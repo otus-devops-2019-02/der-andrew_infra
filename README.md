@@ -344,7 +344,7 @@ RUNNING HANDLER [reload puma] **************************************************
 changed: [appserver]
 
 PLAY RECAP *************************************************************************************************************************************************************************************************
-appserver                  : ok=5    changed=4    unreachable=0    failed=0   
+appserver                  : ok=5    changed=4    unreachable=0    failed=0
 ```
 ## Deploy
 - Добавили такси для деплоя свежего приложения
@@ -363,7 +363,7 @@ TASK [Bundle install] **********************************************************
 changed: [appserver]
 
 PLAY RECAP *************************************************************************************************************************************************************************************************
-appserver                  : ok=3    changed=1    unreachable=0    failed=0   
+appserver                  : ok=3    changed=1    unreachable=0    failed=0
 ```
 - Проверили работу приложения, перейдя по ссылке и создав пост:
 http://35.187.12.34:9292/
@@ -394,8 +394,8 @@ TASK [Gathering Facts] *********************************************************
 ok: [appserver]
 
 PLAY RECAP *************************************************************************************************************************************************************************************************
-appserver                  : ok=1    changed=0    unreachable=0    failed=0   
-dbserver                   : ok=3    changed=2    unreachable=0    failed=0   
+appserver                  : ok=1    changed=0    unreachable=0    failed=0
+dbserver                   : ok=3    changed=2    unreachable=0    failed=0
 ```
 - То же для приложения:
 ***ansible-playbook reddit_app2.yml --tags app-tag***
@@ -423,8 +423,8 @@ RUNNING HANDLER [reload puma] **************************************************
 changed: [appserver]
 
 PLAY RECAP *************************************************************************************************************************************************************************************************
-appserver                  : ok=5    changed=4    unreachable=0    failed=0   
-dbserver                   : ok=1    changed=0    unreachable=0    failed=0   
+appserver                  : ok=5    changed=4    unreachable=0    failed=0
+dbserver                   : ok=1    changed=0    unreachable=0    failed=0
 ```
 - То же для деплоя.
 - Проверили работоспособность по ссылке:
@@ -483,8 +483,8 @@ RUNNING HANDLER [restart puma] *************************************************
 changed: [appserver]
 
 PLAY RECAP *************************************************************************************************************************************************************************************************
-appserver                  : ok=9    changed=7    unreachable=0    failed=0   
-dbserver                   : ok=3    changed=2    unreachable=0    failed=0   
+appserver                  : ok=9    changed=7    unreachable=0    failed=0
+dbserver                   : ok=3    changed=2    unreachable=0    failed=0
 ```
 - Проверили работоспособность по ссылке:
 http://35.187.12.34:9292/
@@ -504,4 +504,10 @@ http://35.187.12.34:9292/
 ***mkdir roles; cd roles***4
 ***ansible-galaxy init app***
 ***ansible-galaxy init db***
-- 
+- Подготовили конфиги для апп и дб.
+- Пересоздали stage.
+- Обновили айпишники
+- Проверили работу:
+***http://35.195.101.219:9292/***
+## Окружения
+-
