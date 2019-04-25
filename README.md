@@ -520,4 +520,9 @@ http://35.187.12.34:9292/
 http://104.155.85.92:9292/
 
 ## Работа с Community-ролями
-- 
+- Add jdauphant.nginx and make config
+- Add vpc rule for tcp/80 for app
+- Add role jdauphant.nginx
+- Apply playbook
+- Проверили приложение по порту 80:
+http://104.155.85.92/
