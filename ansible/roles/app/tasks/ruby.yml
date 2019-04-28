@@ -1,0 +1,11 @@
+---
+- name: Install ruby and rubygems and required packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+    - ruby-full
+    - ruby-bundler
+    - build-essential
+  tags: ruby

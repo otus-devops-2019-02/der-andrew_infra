@@ -6,5 +6,7 @@
     "editor.renderWhitespace": "boundary",
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
-    "editor.suggest.shareSuggestSelections": true
+    "editor.suggest.shareSuggestSelections": true,
+    "python.pythonPath": "venv/bin/python2.7",
+    "workbench.list.horizontalScrolling": true
 }

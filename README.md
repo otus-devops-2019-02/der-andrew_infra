@@ -531,3 +531,85 @@ http://104.155.85.92/
 - Создали конфиги для шифрования данных
 - Зашивровали файлы
 - Проверили а запустили плейбук
+
+
+# Разработка и тестирование Ansible ролей и плейбуков
+
+## Локальная разработка с Vagrant
+- Install virtualbox, vagrant.
+- Form Vagrantfile from gist
+- create vmachines by
+`vagrant up`
+- Check accessible each machines.
+`vagrant ssh (app|db)server`
+
+### Доработка ролей. Провижининг.
+- Add python install as base.yml playbook
+- Divide tasks by files.
+- Run provision and test connection:
+```
+vagrant@appserver:~$ telnet 10.10.10.10 27017
+Trying 10.10.10.10...
+Connected to 10.10.10.10.
+Escape character is '^]'.
+^]
+telnet> quit
+Connection closed.
+```
+- Do the same with app.
+- Parametries app and add extra vars to Vagrantfile
+- Check if app working.
+http://10.10.10.20:9292
+- Recreate project and check app.
+`vagrant destroy -f`
+`vagrant up`
+http://10.10.10.20:9292
+
+## Тестирование ролей
+- Install virtuelenv
+
+```
+pip install --user pipenv
+PATH=$(python -m site --user-base)/bin:$PATH
+cd /home/andrew/work/OTUS-201902-git/der-andrew_infra
+pipenv install requests
+virtualenv venv
+source venv/bin/activate
+pip install virtualenvwrapper
+source $(command -v virtualenvwrapper.sh)
+```
+- Activate virtenv.
+
+`source ../venv/bin/activate`
+- Install requirements. 
+`pip install -r requirements.txt`
+
+### Тестирование db роли
+- Initialise molecule:
+`cd ansible/roles/db`
+`molecule init scenario --scenario-name default -r db -d vagrant`
+- Create Vmachine for tests:
+`cd ansible/roles/db`
+`molecule create`
+- Instances list:
+```
+ansible/roles/db$ molecule list
+--> Validating schema /home/andrew/work/OTUS-201902-git/der-andrew_infra/ansible/roles/db/molecule/default/molecule.yml.
+Validation completed successfully.
+Instance Name    Driver Name    Provisioner Name    Scenario Name    Created    Converged
+---------------  -------------  ------------------  ---------------  ---------  -----------
+instance         vagrant        ansible             default          true       false
+```
+- Apply molecule playbook
+`molecule converge`
+- Go tests!
+`molecule verify`
+- Add to test mongo port
+```
+# check if port tcp/27017 is listening
+def test_mongo_port_listening(host):
+    mongo_port = host.socket("tcp://0.0.0.0:27017")
+    assert mongo_port.is_listening
+```
+- Got tests!
+`molecule verify`
