@@ -19,4 +19,4 @@
   handlers:
   - name: restart puma
     become: true
-    systemd: name=puma state=restarted
+    systemd: name=puma state=restarted daemon_reload=yes
