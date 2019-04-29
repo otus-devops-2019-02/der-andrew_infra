@@ -560,4 +560,7 @@ Connection closed.
 - Parametries app and add extra vars to Vagrantfile
 - Check if app working.
 http://10.10.10.20:9292
-- 
+- Recreate project and check app.
+`vagrant destroy -f`
+`vagrant up`
+http://10.10.10.20:9292
