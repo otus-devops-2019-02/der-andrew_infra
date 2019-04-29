@@ -531,3 +531,17 @@ http://104.155.85.92/
 - Создали конфиги для шифрования данных
 - Зашивровали файлы
 - Проверили а запустили плейбук
+
+
+# Разработка и тестирование Ansible ролей и плейбуков
+
+## Локальная разработка с Vagrant
+- Install virtualbox, vagrant.
+- Form Vagrantfile from gist
+- create vmachines by
+`vagrant up`
+- Check accessible each machines.
+`vagrant ssh (app|db)server`
+
+### Доработка ролей. Провижининг.
+- 
