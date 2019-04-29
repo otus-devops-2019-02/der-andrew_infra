@@ -577,5 +577,10 @@ virtualenv venv
 source venv/bin/activate
 pip install virtualenvwrapper
 source $(command -v virtualenvwrapper.sh)
-
 ```
+- Activate virtenv.
+
+`source ../venv/bin/activate`
+- Install requirements. 
+`pip install -r requirements.txt`
+- 
