@@ -544,4 +544,6 @@ http://104.155.85.92/
 `vagrant ssh (app|db)server`
 
 ### Доработка ролей. Провижининг.
+- Add python install as base.yml playbook
+- Divide tasks by files.
 - 
