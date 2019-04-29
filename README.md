@@ -557,4 +557,5 @@ telnet> quit
 Connection closed.
 ```
 - Do the same with app.
+- Parametries app and add extra vars to Vagrantfile
 - 
