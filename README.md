@@ -583,4 +583,21 @@ source $(command -v virtualenvwrapper.sh)
 `source ../venv/bin/activate`
 - Install requirements. 
 `pip install -r requirements.txt`
+
+### Тестирование db роли
+- Initialise molecule:
+`cd ansible/roles/db`
+`molecule init scenario --scenario-name default -r db -d vagrant`
+- Create Vmachine for tests:
+`cd ansible/roles/db`
+`molecule create`
+- Instances list:
+```
+ansible/roles/db$ molecule list
+--> Validating schema /home/andrew/work/OTUS-201902-git/der-andrew_infra/ansible/roles/db/molecule/default/molecule.yml.
+Validation completed successfully.
+Instance Name    Driver Name    Provisioner Name    Scenario Name    Created    Converged
+---------------  -------------  ------------------  ---------------  ---------  -----------
+instance         vagrant        ansible             default          true       false
+```
 - 
