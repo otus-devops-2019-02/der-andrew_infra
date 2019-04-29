@@ -546,4 +546,15 @@ http://104.155.85.92/
 ### Доработка ролей. Провижининг.
 - Add python install as base.yml playbook
 - Divide tasks by files.
+- Run provision and test connection:
+```
+vagrant@appserver:~$ telnet 10.10.10.10 27017
+Trying 10.10.10.10...
+Connected to 10.10.10.10.
+Escape character is '^]'.
+^]
+telnet> quit
+Connection closed.
+```
+- Do the same with app.
 - 
