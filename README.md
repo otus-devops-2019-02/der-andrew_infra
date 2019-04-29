@@ -600,4 +600,14 @@ Instance Name    Driver Name    Provisioner Name    Scenario Name    Created    
 ---------------  -------------  ------------------  ---------------  ---------  -----------
 instance         vagrant        ansible             default          true       false
 ```
-- 
+- Apply molecule playbook
+`molecule converge`
+- Go tests!
+`molecule verify`
+- Add to test mongo port
+```
+# check if port tcp/27017 is listening
+def test_mongo_port_listening(host):
+    mongo_port = host.socket("tcp://0.0.0.0:27017")
+    assert mongo_port.is_listening
+```
