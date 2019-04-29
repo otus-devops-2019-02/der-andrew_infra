@@ -564,3 +564,18 @@ http://10.10.10.20:9292
 `vagrant destroy -f`
 `vagrant up`
 http://10.10.10.20:9292
+
+## Тестирование ролей
+- Install virtuelenv
+
+```
+pip install --user pipenv
+PATH=$(python -m site --user-base)/bin:$PATH
+cd /home/andrew/work/OTUS-201902-git/der-andrew_infra
+pipenv install requests
+virtualenv venv
+source venv/bin/activate
+pip install virtualenvwrapper
+source $(command -v virtualenvwrapper.sh)
+
+```

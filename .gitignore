@@ -14,3 +14,6 @@ jdauphant.nginx
 .molecule
 .cache
 .pytest_cache
+#pip virtual env
+Pipfile*
+venv/
