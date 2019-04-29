@@ -611,3 +611,5 @@ def test_mongo_port_listening(host):
     mongo_port = host.socket("tcp://0.0.0.0:27017")
     assert mongo_port.is_listening
 ```
+- Got tests!
+`molecule verify`
