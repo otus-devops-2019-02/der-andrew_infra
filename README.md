@@ -558,4 +558,6 @@ Connection closed.
 ```
 - Do the same with app.
 - Parametries app and add extra vars to Vagrantfile
+- Check if app working.
+http://10.10.10.20:9292
 - 
